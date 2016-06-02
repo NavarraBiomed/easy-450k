@@ -123,6 +123,8 @@ It is used to match phenotypes to samples, so it is important for it to be corre
 
 ###### 6. Configs/analysis.yaml
 
+phenotypes_info.txt
+
 There are currently 2 analysis options, wilcoxon test and linear regression model (more tests will be added in the future).
 
 For wilcoxon test, make the config file that looks like this:
