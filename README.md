@@ -126,7 +126,8 @@ It is used to match phenotypes to samples, so it is important for it to be corre
 There are currently 2 analysis options, wilcoxon test and linear regression model (more tests will be added in the future).
 
 For wilcoxon test, make the config file that looks like this:
-
+	
+	phenotype_file: Configs/phenotype_file.txt
 	type: wilcoxon
 	n_cores: 5
 	group: CaseControl_Column_Name
@@ -134,8 +135,8 @@ For wilcoxon test, make the config file that looks like this:
 	exact: true
 	
 	
-Column with CategoricalA\_Column\_Name should contain only the following values: 1, 2, -1.
-Samples with value 1 will be tested against samples with value 2. 
+Column with CaseControl_Column_Name should contain only the following values: 1, 2, -1.
+Samples with value 1 will be tested against samples with value 2. Samples with value -1 are ignored.
 If paired is set up to true, paires will be determined by the order of samples in both vectors.
 
 For linear regression tests, use the following:
