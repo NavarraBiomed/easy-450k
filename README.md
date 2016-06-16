@@ -39,7 +39,7 @@ git clone https://github.com/petr-volkov/easy-450k
 
 1. Create a new project
         
-        python3 ${path_to_cloned_repo}/easy_450k.py project_name
+        python3 ${path_to_cloned_repo}/easy-450k.py project_name
         
 2. Edit configuration files
 
@@ -127,6 +127,7 @@ There are currently 2 analysis options, wilcoxon test and linear regression mode
 
 For wilcoxon test, make the config file that looks like this:
 
+	phenotype_file: Configs/phenotype_file.txt
 	type: wilcoxon
 	n_cores: 5
 	group: CaseControl_Column_Name
@@ -134,22 +135,23 @@ For wilcoxon test, make the config file that looks like this:
 	exact: true
 	
 	
-Column with CategoricalA\_Column\_Name should contain only the following values: 1, 2, -1.
-Samples with value 1 will be tested against samples with value 2. 
-If paired is set up to true, paires will be determined by the order of samples in both vectors.
+Column with CaseControl_Column_Name should contain only the following values: 1, 2, -1.
+Samples with value 1 will be tested against samples with value 2. Samples with value -1 are ignored.
+If paired is set up to true, pairs will be determined by the order of samples in both vectors.
 
 For linear regression tests, use the following:
 
+	phenotype_file: Configs/phenotype_file.txt
 	type: lm
 	n_cores: 46
 	covariates:
     numeric:
+		- NumericA_Column_Name
+		- NumericB_Column_Name
+    categorical:
 		- CategoricalA_Column_Name
 		- CategoricalB_Column_Name
 		- CategoricalC_Column_Name
-    categorical:
-		- NumericA_Column_Name
-		- NumericB_Column_Name
 
 This is file can be the same as Configs/combat.yaml, but it is not always the case. 
 Therefore, 2 perhaps very similar config files are needed, to avoid more complex logic.
