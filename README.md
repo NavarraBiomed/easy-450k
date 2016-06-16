@@ -39,7 +39,7 @@ git clone https://github.com/petr-volkov/easy-450k
 
 1. Create a new project
         
-        python3 ${path_to_cloned_repo}/easy-450k.py project_name
+        python3 ${path_to_cloned_repo}/easy_450k.py project_name
         
 2. Edit configuration files
 
@@ -49,8 +49,8 @@ git clone https://github.com/petr-volkov/easy-450k
 
 #### Illumina 450k configuration options ####
 
-###### 1. Configs/preprocessing_samples.txt
-Includes a list of samples, line by line, to be included in the preprocessing.
+###### 1. Configs/analysis_samples.txt
+Includes a list of samples, line by line, to be included in the analysis.
 
 ###### 2. Configs/probe_filtering.yaml
 Allows to define criteria to filter probes from the analysis.
@@ -121,20 +121,12 @@ separated text file, with phenotypes and other variables of interest as columns,
 Sample\_names\_column should correspond to a subset of sample names of the original GenomeStudio file.
 It is used to match phenotypes to samples, so it is important for it to be correct.
 
-###### 6. Configs/analysis_samples.txt
-Includes a list of samples, line by line, to be included in the analysis.
-
-In most cases the same as preprocessing_samples.txt
-
 ###### 6. Configs/analysis.yaml
-
-phenotypes_info.txt
 
 There are currently 2 analysis options, wilcoxon test and linear regression model (more tests will be added in the future).
 
 For wilcoxon test, make the config file that looks like this:
-	
-	phenotype_file: Configs/phenotype_file.txt
+
 	type: wilcoxon
 	n_cores: 5
 	group: CaseControl_Column_Name
@@ -142,8 +134,8 @@ For wilcoxon test, make the config file that looks like this:
 	exact: true
 	
 	
-Column with CaseControl_Column_Name should contain only the following values: 1, 2, -1.
-Samples with value 1 will be tested against samples with value 2. Samples with value -1 are ignored.
+Column with CategoricalA\_Column\_Name should contain only the following values: 1, 2, -1.
+Samples with value 1 will be tested against samples with value 2. 
 If paired is set up to true, paires will be determined by the order of samples in both vectors.
 
 For linear regression tests, use the following:
@@ -152,12 +144,12 @@ For linear regression tests, use the following:
 	n_cores: 46
 	covariates:
     numeric:
-		- NumericA_Column_Name
-		- NumericB_Column_Name
-    categorical:
 		- CategoricalA_Column_Name
 		- CategoricalB_Column_Name
 		- CategoricalC_Column_Name
+    categorical:
+		- NumericA_Column_Name
+		- NumericB_Column_Name
 
 This is file can be the same as Configs/combat.yaml, but it is not always the case. 
 Therefore, 2 perhaps very similar config files are needed, to avoid more complex logic.

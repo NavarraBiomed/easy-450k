@@ -1,4 +1,4 @@
-bmiq_dataset <- readRDS(defaults$bmiq_path)
+bmiq_dataset <- readRDS("Temp/bmiq_dataset.RData")
 
 ##meth_matrix <- get_values(bmiq_dataset[[1]])
 ##annotation <- get_annotation(bmiq_dataset[[1]])
